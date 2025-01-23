@@ -52,39 +52,76 @@ A modern web application for real-time recognition of Indian currency notes usin
 
 Follow these steps to set up and run the project locally:
 
-### 1. Clone the Repository
+1. Clone the repository:  
+   `git clone https://github.com/vishaldhavali/Diploma_currency-recognition-system.git`  
+   `cd Diploma_currency-recognition-system`
 
-```bash
-git clone https://github.com/vishaldhavali/Diploma_currency-recognition-system.git
-cd Diploma_currency-recognition-system
-```
-### 2. Create a Virtual Environment
+2. Create a virtual environment:  
+
+   For Windows:  
+   `python -m venv env`  
+   `.\env\Scripts\activate`  
+
+   For Linux/Mac:  
+   `python -m venv env`  
+   `source env/bin/activate`
+
+3. Install the required dependencies:  
+   `pip install -r requirements.txt`
+
+4. Run the application:  
+   `python index.py`
+
+5. Access the web application:  
+   Open your browser and visit: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+---
+
+## 🎯 Usage Instructions
+
+1. Access the web interface at [http://127.0.0.1:5000](http://127.0.0.1:5000).  
+2. Drag and drop an image or click to upload an image of an Indian currency note.  
+3. Click the "DETECT" button to process the image.  
+4. View the results, including the detected currency and its confidence score.  
+
+---
+
+## 📂 Project Structure
+
+currency-recognition-system/ ├── static/ │ ├── background.jpg │ └── upload-icon.png ├── templates/ │ ├── error.html │ ├── index.html │ └── result.html ├── Main.py ├── DetectChars.py ├── DetectPlates.py ├── PossibleChar.py ├── PossiblePlate.py ├── Preprocess.py ├── index.py └── requirements.txt
 
 
-# For Windows
-```bash
-python -m venv env
-.\env\Scripts\activate
-```
+---
 
-# For Linux/Mac
-```bash
-python -m venv env
-source env/bin/activate
-```
-### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-### 4. Run the Application
-```bash
-python index.py
-```
-### 5. Access the Web Application
-Open your browser and visit: http://127.0.0.1:5000
+## 🤝 Contributing
 
-### 🎯 Usage Instructions
-1.Access the web interface at http://127.0.0.1:5000.
-2.Drag and drop an image or click to upload an image of an Indian currency note.
-3.Click the "DETECT" button to process the image.
-4.View the results, including the detected currency and its confidence score.
+Contributions are welcome! Follow these steps to contribute:
+
+1. Fork the project.  
+2. Create a feature branch: `git checkout -b feature/YourFeature`.  
+3. Commit your changes: `git commit -m "Add your message here"`.  
+4. Push to the branch: `git push origin feature/YourFeature`.  
+5. Open a Pull Request.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+## 📞 Contact
+
+Vishal Dhavali  
+GitHub: [@vishaldhavali](https://github.com/vishaldhavali)  
+Email: vishaldhavali123@gmail.com
+
+---
+
+## 🔖 Acknowledgments
+
+- OpenCV Documentation  
+- TensorFlow Documentation  
+- Indian Currency Dataset  
+- Flask Documentation
