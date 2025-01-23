@@ -57,3 +57,34 @@ Follow these steps to set up and run the project locally:
 ```bash
 git clone https://github.com/vishaldhavali/Diploma_currency-recognition-system.git
 cd Diploma_currency-recognition-system
+```
+### 2. Create a Virtual Environment
+
+
+# For Windows
+```bash
+python -m venv env
+.\env\Scripts\activate
+```
+
+# For Linux/Mac
+```bash
+python -m venv env
+source env/bin/activate
+```
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+### 4. Run the Application
+```bash
+python index.py
+```
+### 5. Access the Web Application
+Open your browser and visit: http://127.0.0.1:5000
+
+### 🎯 Usage Instructions
+1.Access the web interface at http://127.0.0.1:5000.
+2.Drag and drop an image or click to upload an image of an Indian currency note.
+3.Click the "DETECT" button to process the image.
+4.View the results, including the detected currency and its confidence score.
