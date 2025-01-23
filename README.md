@@ -88,7 +88,23 @@ Follow these steps to set up and run the project locally:
 
 ## 📂 Project Structure
 
-currency-recognition-system/ ├── static/ │ ├── background.jpg │ └── upload-icon.png ├── templates/ │ ├── error.html │ ├── index.html │ └── result.html ├── Main.py ├── DetectChars.py ├── DetectPlates.py ├── PossibleChar.py ├── PossiblePlate.py ├── Preprocess.py ├── index.py └── requirements.txt
+currency-recognition-system/
+├── static/                      # Contains static assets like images, CSS, and JavaScript
+│   ├── background.jpg           # Background image for the web interface
+│   └── upload-icon.png          # Icon for the drag-and-drop upload functionality
+├── templates/                   # Contains HTML templates for the Flask app
+│   ├── error.html               # Error page template
+│   ├── index.html               # Home page template
+│   └── result.html              # Results display page template
+├── Main.py                      # Core logic for the application
+├── DetectChars.py               # Module for character detection
+├── DetectPlates.py              # Module for plate detection
+├── PossibleChar.py              # Helper module for possible character filtering
+├── PossiblePlate.py             # Helper module for possible plate filtering
+├── Preprocess.py                # Module for preprocessing input images
+├── index.py                     # Entry point for the Flask application
+└── requirements.txt             # List of dependencies required for the project
+
 
 
 ---
