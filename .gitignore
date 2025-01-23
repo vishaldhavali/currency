@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+env/
+venv/
+.env
+.venv
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+
+# Project specific
+instance/
+.webassets-cache
+
+
+# Keep screenshots
+!screenshots/*.png
+
+# System files
+.DS_Store
+Thumbs.db

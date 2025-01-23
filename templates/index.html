@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Currency Detector</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: url("/static/background.jpg") no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      .title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #1e3c72;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .form-container {
+        border: 2px dashed #2a5298;
+        border-radius: 15px;
+        padding: 40px 20px;
+        background-color: rgba(42, 82, 152, 0.05);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .form-container:hover {
+        background-color: rgba(42, 82, 152, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .upload-icon {
+        width: 80px;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .form-container:hover .upload-icon {
+        transform: scale(1.1);
+      }
+
+      .upload-icon-container {
+        text-align: center;
+      }
+
+      .upload-text {
+        text-align: center;
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .supported-formats {
+        text-align: center;
+        font-size: 12px;
+        color: #888;
+        margin-top: 10px;
+      }
+
+      .button-submit {
+        width: 100%;
+        padding: 15px;
+        border-radius: 10px;
+        border: none;
+        font-size: 18px;
+        font-weight: 500;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .button-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(42, 82, 152, 0.3);
+      }
+
+      .button-submit:active {
+        transform: translateY(0);
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 4px;
+        background-color: #eee;
+        border-radius: 2px;
+        margin-top: 20px;
+        display: none;
+      }
+
+      .progress {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <form
+      action="/upload"
+      method="POST"
+      onsubmit="return validateForm(event)"
+      enctype="multipart/form-data"
+    >
+      <div class="container">
+        <div class="title">Currency Detector</div>
+        <div class="form-container" onclick="onDivClick()">
+          <div class="upload-icon-container">
+            <img
+              src="/static/upload-icon.png"
+              class="upload-icon"
+              alt="Upload"
+            />
+          </div>
+          <div class="upload-text">Click or drag to upload a currency note</div>
+          <div class="supported-formats">
+            Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP
+          </div>
+          <input
+            name="vehicle"
+            id="file-vehicle"
+            type="file"
+            accept="image/*"
+            hidden="hidden"
+            onchange="onFileChange(event)"
+          />
+        </div>
+        <div class="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+        <div class="loading" id="loading">Processing image...</div>
+        <button type="submit" class="button-submit" id="submit-btn">
+          DETECT
+        </button>
+      </div>
+    </form>
+
+    <script>
+      const fileElement = document.getElementById("file-vehicle");
+      const progressBar = document.querySelector(".progress-bar");
+      const progress = document.getElementById("progress");
+      const loading = document.getElementById("loading");
+      const submitBtn = document.getElementById("submit-btn");
+      const allowed_extensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
+
+      function onDivClick() {
+        fileElement.click();
+      }
+
+      function getFileName(name = "") {
+        const extension = name.split(".").slice(-1)[0].toLowerCase();
+        return allowed_extensions.includes(extension);
+      }
+
+      function showLoading() {
+        progressBar.style.display = "block";
+        loading.style.display = "block";
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.7";
+
+        let width = 0;
+        const interval = setInterval(() => {
+          if (width >= 90) {
+            clearInterval(interval);
+          } else {
+            width++;
+            progress.style.width = width + "%";
+          }
+        }, 50);
+      }
+
+      function onFileChange(event) {
+        if (event.target.files.length) {
+          const file = event.target.files[0];
+          if (!file.type.startsWith("image/")) {
+            showError("Please select an image file");
+            return;
+          }
+          const extension = getFileName(file.name);
+          if (!extension) {
+            showError("Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP");
+          }
+        }
+      }
+
+      function showError(message) {
+        fileElement.value = "";
+        const errorDiv = document.createElement("div");
+        errorDiv.style.color = "#ff3b30";
+        errorDiv.style.textAlign = "center";
+        errorDiv.style.marginTop = "10px";
+        errorDiv.textContent = message;
+
+        const container = document.querySelector(".container");
+        const existingError = container.querySelector(".error-message");
+        if (existingError) {
+          container.removeChild(existingError);
+        }
+        errorDiv.className = "error-message";
+        container.insertBefore(errorDiv, submitBtn);
+
+        setTimeout(() => {
+          errorDiv.remove();
+        }, 3000);
+      }
+
+      function validateForm(event) {
+        if (!fileElement.files?.length) {
+          showError("Please select an image");
+          return false;
+        }
+
+        const file = fileElement.files[0];
+        if (!file.type.startsWith("image/")) {
+          showError("Please select an image file");
+          return false;
+        }
+
+        const extension = getFileName(file.name);
+        if (!extension) {
+          showError("Supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP");
+          return false;
+        }
+
+        showLoading();
+        return true;
+      }
+    </script>
+  </body>
+</html>

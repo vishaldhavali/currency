@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Detection Result</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: url("/static/background.jpg") no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #1e3c72;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .result-container {
+        background-color: rgba(42, 82, 152, 0.05);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .result-container-note {
+        margin: 20px 0;
+      }
+
+      .result-container-note h1 {
+        font-size: 20px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .result-container-note h2 {
+        font-size: 48px;
+        color: #1e3c72;
+        margin: 0;
+      }
+
+      .confidence {
+        font-size: 14px;
+        color: #666;
+        margin-top: 10px;
+      }
+
+      .button-back {
+        width: 100%;
+        padding: 15px;
+        border-radius: 10px;
+        border: none;
+        font-size: 18px;
+        font-weight: 500;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .button-back:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(42, 82, 152, 0.3);
+      }
+
+      .result-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Detection Result</div>
+      <div class="result-container">
+        <div class="result-container-note">
+          <h1>Detected Currency</h1>
+          <h2>₹{{value}}</h2>
+          {% if confidence %}
+          <div class="confidence">Confidence: {{confidence}}%</div>
+          {% endif %}
+        </div>
+        {% if image_path %}
+        <img
+          src="{{image_path}}"
+          alt="Detected Currency"
+          class="result-image"
+        />
+        {% endif %}
+      </div>
+      <button class="button-back" onclick="goBack()">SCAN ANOTHER</button>
+    </div>
+    <script>
+      function goBack() {
+        window.location.href = "/";
+      }
+    </script>
+  </body>
+</html>
