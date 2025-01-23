@@ -87,7 +87,7 @@ Follow these steps to set up and run the project locally:
 ---
 
 ## 📂 Project Structure
-
+---
 currency-recognition-system/
 ├── static/                      # Contains static assets like images, CSS, and JavaScript
 │   ├── background.jpg           # Background image for the web interface
@@ -105,7 +105,7 @@ currency-recognition-system/
 ├── index.py                     # Entry point for the Flask application
 └── requirements.txt             # List of dependencies required for the project
 
-
+---
 
 ---
 
